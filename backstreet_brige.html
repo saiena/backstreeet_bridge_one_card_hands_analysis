@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<!-- META TAGS -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<!-- CSS -->
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+		<link rel="stylesheet" href="nmd_styles.css">
+		<title>Backstreet Bridge</title>
+	</head>
+	<body class="p-3">
+		<!-- JAVASCRIPT -->
+	    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    	<script src="./nmd_card_game.js"></script>
+		
+		<div id="nmd-main-container" class="container">
+			<div class="row">
+				<div class="col">
+					<h3 class="my-3">Backstreet Bridge<br><small>Winning Percentages For One-Card Hands</small>
+						<a class="float-right nmd-help-link" href="./help.html" target="_blank">Help!</a>
+					</h3>
+					<hr>
+				</div>
+			</div>
+			<div class="row mb-3">
+				<div class="col-md-3">
+					<span class="badge badge-success mr-1">1</span>&nbsp;<strong>Choose Players</strong>
+					<div class="pr-md-0">
+						<select id="nmd-number-of-players-select" class="custom-select mt-3 ml-4 w-75">
+							<option value="0" selected>Choose...</option>
+							<option value="2">Two</option>
+							<option value="3">Three</option>
+							<option value="4">Four</option>
+							<option value="5">Five</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-md-6 mt-4 mt-md-0">
+					<span class="badge badge-success mr-1">2</span>&nbsp;<strong>Play Hands</strong>
+					<div class="mt-3 ml-3 row">
+						<div class="col-5">
+							<button type="button" class="btn btn-block btn-sm btn-secondary" onClick="nmdPlayHand();">Play One</button>
+						</div>
+						<div class="col-1 text-center pt-2">
+							<span class="h6">OR</span>
+						</div>
+						<div class="col-5">
+							<button id="nmd-autoplay-button" type="button" class="btn btn-block btn-sm btn-primary" onClick="nmdAutoPlayHands();">Auto-Play</button>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3 mt-4 mt-md-0">
+					<span class="badge badge-success mr-1">3</span>&nbsp;<strong>View Stats</strong>
+					<p class="mt-2 ml-4" style="line-height:120%">Scroll down to view statistics.</p>
+				</div>
+			</div>
+			<div class="row" class="mt-5">
+				<div id="nmd-output-deck-container" class="col-md-3 order-2 order-md-1 order-lg-1 order-xl-1"></div>
+				<div id="nmd-output-table-container" class="col-md-8 offset-md-1 p-0 order-sm-1 order-md-2 order-lg-2 order-xl-2">
+					<div id="nmd-output-table" class="d-none">
+						<div id="nmd-card-table" class="py-3">
+							<div class="row mx-0 px-0">
+								<div id="nmd-seat-column-player_1" class="col nmd-seat"><div class="nmd-player-name text-center mb-3">PLAYER 1</div><div class="nmd-playing-card" id="nmd-seat-player_1" style="font-size:1.4em;"><span class="d-none nmd-playing-card-winner_notice"></span></div></div>
+								<div id="nmd-seat-column-player_2" class="col nmd-seat"><div class="nmd-player-name text-center mb-3">PLAYER 2</div><div class="nmd-playing-card" id="nmd-seat-player_2" style="font-size:1.4em;"><span class="d-none nmd-playing-card-winner_notice"></span></div></div>
+								<div id="nmd-seat-column-player_3" class="col nmd-seat"><div class="nmd-player-name text-center mb-3">PLAYER 3</div><div class="nmd-playing-card" id="nmd-seat-player_3" style="font-size:1.4em;"><span class="d-none nmd-playing-card-winner_notice"></span></div></div>
+								<div id="nmd-seat-column-player_4" class="col nmd-seat"><div class="nmd-player-name text-center mb-3">PLAYER 4</div><div class="nmd-playing-card" id="nmd-seat-player_4" style="font-size:1.4em;"><span class="d-none nmd-playing-card-winner_notice"></span></div></div>
+								<div id="nmd-seat-column-player_5" class="col nmd-seat"><div class="nmd-player-name text-center mb-3">PLAYER 5</div><div class="nmd-playing-card" id="nmd-seat-player_5" style="font-size:1.4em;"><span class="d-none nmd-playing-card-winner_notice"></span></div></div>
+							</div>
+							<div class="row">
+								<div class="col text-center pt-2 mt-2">
+									<hr class="bg-light mx-3">
+									<div id="nmd-trump-card" class="col text-center pt-2">
+										TRUMP<br><span style="font-size:1.4em;" id="nmd-output-trump-container"></span>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="row mt-4">
+							<div class="col">
+								<h4>Statistics</h4>
+								<div class="row mb-2">
+									<div class="col-6 text-left">
+										Total Hands Played: <span id="nmd_results_hands_count"></span>
+									</div>
+									<div class="col-6 text-right">
+										Last Winner: <span id="nmd_results_winner"></span>
+									</div>
+								</div>
+								<div class="clearfix"></div>
+								<table class="table table-bordered">
+									<thead class="thead-light">
+										<tr>
+											<th scope="column" class="w-25"></th>
+											<th scope="column" class="w-25 text-center">Wins</th>
+											<th scope="column" class="w-25 text-center">With Trump</th>
+											<th scope="column" class="w-25 text-center">Without Trump</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr id="nmd_results_player_1_row" class="nmd_results_player_row">
+											<th scope="row">Player 1</th>
+											<td><span id="nmd_results_player_1_wins"></span></td>
+											<td><span id="nmd_results_player_1_wins_with_trump"></span></td>
+											<td><span id="nmd_results_player_1_wins_without_trump"></span></td>
+										</tr>
+										<tr id="nmd_results_player_2_row" class="nmd_results_player_row">
+											<th scope="row">Player 2</th>
+											<td><span id="nmd_results_player_2_wins"></span></td>
+											<td><span id="nmd_results_player_2_wins_with_trump"></span></td>
+											<td><span id="nmd_results_player_2_wins_without_trump"></span></td>
+										</tr>
+										<tr id="nmd_results_player_3_row" class="nmd_results_player_row">
+											<th scope="row">Player 3</th>
+											<td><span id="nmd_results_player_3_wins"></span></td>
+											<td><span id="nmd_results_player_3_wins_with_trump"></span></td>
+											<td><span id="nmd_results_player_3_wins_without_trump"></span></td>
+										</tr>
+										<tr id="nmd_results_player_4_row" class="nmd_results_player_row">
+											<th scope="row">Player 4</th>
+											<td><span id="nmd_results_player_4_wins"></span></td>
+											<td><span id="nmd_results_player_4_wins_with_trump"></span></td>
+											<td><span id="nmd_results_player_4_wins_without_trump"></span></td>
+										</tr>
+										<tr id="nmd_results_player_5_row" class="nmd_results_player_row">
+											<th scope="row">Player 5</th>
+											<td><span id="nmd_results_player_5_wins"></span></td>
+											<td><span id="nmd_results_player_5_wins_with_trump"></span></td>
+											<td><span id="nmd_results_player_5_wins_without_trump"></span></td>
+										</tr>
+									</tbody>
+								</table>
+								<div class="custom-control custom-switch float-right mb-4">
+									<input type="checkbox" class="custom-control-input" id="nmd-percent-display-toggle">
+									<label class="custom-control-label" for="nmd-percent-display-toggle">Show Percent Decimals</label>
+								</div>
+							</div>
+						</div>
+						
+					</div>
+				</div>
+			</dir>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,89 @@
+
+
+h3 small {
+	font-size: 16px;
+}
+
+.nmd-help-link {
+	font-size: 14px;
+}
+
+#nmd-deck-table {
+	border: 2px solid #555555;
+	margin: auto;
+}
+
+#nmd-deck-table * {
+	text-align: center;
+}
+
+#nmd-card-table {
+	background: #30836F;
+	color: #FFFFFF;
+	border: 2px solid #555555;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-khtml-border-radius: 5px;
+	border-radius: 5px;
+}
+
+#nmd-autplay-status-wrapper {
+	font-size: .8em;
+}
+
+#nmd-autplay-status-count {
+	background: #DDEECC;
+	padding: 0 3px 0 3px;
+}
+
+.nmd-playing-card {
+	position: relative;
+	max-width: 200px;
+	margin: auto;
+	border: 2px solid #555555;
+	background: #FFFFFF;
+	text-align: center;
+	padding-top: 35%;
+	aspect-ratio: 9/14;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-khtml-border-radius: 5px;
+	border-radius: 5px;
+}
+
+.nmd-winning-card {
+	border: 4px solid #176DF9;
+}
+
+.nmd-playing-card-winner_notice {
+	position:absolute;
+	bottom:0;
+	left: 0;
+	margin: auto;
+	background-color: #176DF9;
+	color: #FFFFFF;
+	text-align: center;
+	width: 100%;
+	padding-top: 4px;
+	padding-bottom: 4px;
+	font-size: 14px;
+	line-height: 110%;
+}
+.nmd-playing-card-winner_notice:after {
+  content: 'You\'re a Winner!';
+}
+
+
+#nmd-trump-card {
+	color: #000000;
+	max-width: 160px;
+	margin: auto;
+	border: 2px solid #555555;
+	background: #FFFFFF;
+	text-align: center;
+	aspect-ratio: 14/9;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-khtml-border-radius: 5px;
+	border-radius: 5px;
+}

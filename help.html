@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<!-- META TAGS -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<!-- CSS -->
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+		<link rel="stylesheet" href="nmd_styles.css">
+		<title>Backstreet Bridge</title>
+	</head>
+	<body class="p-3">
+		<!-- JAVASCRIPT -->
+	    
+
+<script
+  src="https://code.jquery.com/jquery-3.6.0.min.js"
+  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+  crossorigin="anonymous"></script>
+
+    	<script src="./nmd_card_game.js"></script>
+		
+		<div id="nmd-main-container" class="container">
+			<div class="row">
+				<div class="col">
+					<h3 class="my-3">Backstreet Bridge<br><small>Winning Percentages For One-Card Hands</small>
+						<a class="float-right nmd-help-link" href="./help.html" target="_blank">Help!</a>
+					</h3>
+					<hr>
+				</div>
+			</div>
+			<div class="row mb-3">
+				<div class="col">
+					<div id="javascript-code" contenteditable="true"></div>
+				</div>
+			</dir>
+		</div>
+
+
+		<script type="text/javascript">
+			$('#javascript-code').load('./nmd_card_game.js');
+		</script>
+
+	</body>
+</html>
