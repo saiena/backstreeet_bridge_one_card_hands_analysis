@@ -24,6 +24,29 @@
 						<a class="float-right nmd-help-link" href="./index.html" target="_blank">Back to Game</a>
 					</h3>
 					<hr>
+					<p>This application was developed to provide insights into the best strategy for a specific scenario in Backstreet Bridge:</p>
+					<ul>
+						<li>Hand consists of 1 card dealt to each player</li>
+						<li>Player 1 (the player to the dealer's left) must decide what to bid</li>
+					</ul>
+					This scenario has generated some controversy:
+					<ul>
+						<li>Some experts have proposed that Player 1 should assume they will win the trick and therefore bid "1", and that all other players should bid "0" (with the exception of the dealer who will be forced to bid "1").</li>
+						<li>Others have proposed that Player 1 should assume they will win the trick <strong>only if they hold a trump card</strong>.</li>
+					</ul>
+					<p>This application can be used to view the win rate of Player 1 when they have a trump card and when they do not have a trump card. By using the application's "Auto-Play" feature, statistics based on thousands for single-card hands can be generated.</p>
+
+					<h5 class="mt-4">How the Application Works</h5>
+					<p>This application was written in Javascript, and displays data using an HTML + CSS template.</p>
+					<p>The Javascript code performs the following operations:</p>
+					<ul>
+						<li>create a virtual deck of cards (create array)</li>
+						<li>shuffle the virtual deck (sort array)
+						<li>display the shuffled deck</li>
+						<li>deal a hand from the top of the shuffled deck</li>
+						<li>calculate the winner of the hand and store results</li>
+						<li>update the displayed statistics</li>
+					</ul>
 				</div>
 			</div>
 			<div class="row mb-3">
