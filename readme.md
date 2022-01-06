@@ -11,6 +11,17 @@ This scenario has generated some controversy:
 
 This application can be used to view the win rate of Player 1 when they have a trump card and when they do not have a trump card. By using the application's "Auto-Play" feature, statistics based on thousands for single-card hands can be generated.
 
+### Using the Application
+Using the application is a 3-step process:
+* Choose Players - Choose the number of players sitting at the virtual table
+* Play Hands - Click the "Play One" button to play a single hand; Click the "Auto-Play" button to start an atomated playing of multiple hands;
+* View Stats - Scroll down to the "Statistics" section to view the result.
+**boldTips**
+* Use the Auto-Play feature to allow th eapp to play thousands of hands. The more hands played, the more reliable the statistics. The application developer notes that after about 10,000 hands played, the statistics remain stable.
+* You can watch the statistics change while auto-play is in progress.
+* You use both the "Play One" and "Auto-Play" buttons to generate data for analysis.
+* enable the "Show Percent Decimals" option to see percentage details.
+
 ### How the Application Works
 This application was written in Javascript, and displays data using an HTML + CSS template.
 
