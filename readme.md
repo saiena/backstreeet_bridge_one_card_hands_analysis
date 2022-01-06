@@ -1,5 +1,6 @@
 # Backstreet Bridge
-**boldWinning Percentages For One-Card Handss**
+
+**Winning Percentages For One-Card Hands**
 
 This application was developed to provide insights into the best strategy for a specific scenario in Backstreet Bridge:
 * Hand consists of 1 card dealt to each player
@@ -16,7 +17,9 @@ Using the application is a 3-step process:
 * Choose Players - Choose the number of players sitting at the virtual table
 * Play Hands - Click the "Play One" button to play a single hand; Click the "Auto-Play" button to start an atomated playing of multiple hands;
 * View Stats - Scroll down to the "Statistics" section to view the result.
-**boldTips**
+
+**Tips**
+
 * Use the Auto-Play feature to allow th eapp to play thousands of hands. The more hands played, the more reliable the statistics. The application developer notes that after about 10,000 hands played, the statistics remain stable.
 * You can watch the statistics change while auto-play is in progress.
 * You use both the "Play One" and "Auto-Play" buttons to generate data for analysis.
