@@ -20,9 +20,9 @@ Using the application is a 3-step process:
 
 **Tips**
 
-* Use the Auto-Play feature to allow th eapp to play thousands of hands. The more hands played, the more reliable the statistics. The application developer notes that after about 10,000 hands played, the statistics remain stable.
+* Use the Auto-Play feature to allow the app to play thousands of hands. The more hands played, the more reliable the statistics. The application developer notes that after about 10,000 hands played, the statistics remain stable.
 * You can watch the statistics change while auto-play is in progress.
-* You use both the "Play One" and "Auto-Play" buttons to generate data for analysis.
+* You can use both the "Play One" and "Auto-Play" buttons to generate data for analysis.
 * enable the "Show Percent Decimals" option to see percentage details.
 
 ### How the Application Works
