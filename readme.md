@@ -10,7 +10,7 @@ This scenario has generated some controversy:
 * Some experts have proposed that Player 1 should assume they will win the trick and therefore bid "1", and that all other players should bid "0" (with the exception of the dealer who will be forced to bid "1").
 * Others have proposed that Player 1 should assume they will win the trick only if they hold a trump card.
 
-This application can be used to view the win rate of Player 1 when they have a trump card and when they do not have a trump card. By using the application's "Auto-Play" feature, statistics based on thousands for single-card hands can be generated.
+This application can be used to view the win rate of Player 1 when they have a trump card and when they do not have a trump card. By using the application's "Auto-Play" feature, statistics based on thousands of single-card hands can be generated.
 
 ### Using the Application
 Using the application is a 3-step process:
