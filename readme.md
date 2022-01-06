@@ -1,5 +1,5 @@
 # Backstreet Bridge
-##Winning Percentages For One-Card Hands
+### Winning Percentages For One-Card Hands
 
 This application was developed to provide insights into the best strategy for a specific scenario in Backstreet Bridge:
 	* Hand consists of 1 card dealt to each player
