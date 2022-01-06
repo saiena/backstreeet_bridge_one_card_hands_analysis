@@ -75,6 +75,11 @@ window.nmdCalculateWinner = function () {
 	nmdCardgamesResults.winning_player = 'player_1';
 	var winning_card = nmdCardgamesResults.player_cards['player_1'];
 
+	// record if the player1 has a trump card
+	if (winning_card['suit_code'] == nmdCardgamesGlobals.trump_card['suit_code']) {
+		nmdCardgamesResults.player_tricks['player_1']['hands_with_trump']++;
+	}
+
 	// update counter of hands
 	nmdCardgamesGlobals.handsPlayed++;
 
@@ -83,6 +88,9 @@ window.nmdCalculateWinner = function () {
 		// get player card from global
 		var player = 'player_' + j;
 		var player_card = nmdCardgamesResults.player_cards[player];
+
+		// record if the player has a trump card
+		nmdCardgamesResults.player_tricks[player]['hands_with_trump']++;
 
 		// if player connot follow suit, and they don't have trump, skip them
 		if (player_card['suit_code'] != winning_card['suit_code'] && player_card['suit_code'] != nmdCardgamesGlobals.trump_card['suit_code']) {
@@ -114,22 +122,28 @@ window.nmdUpdateResultsDisplay = function () {
 	// update stats display
 	$('#nmd_results_winner').text(nmdCardgamesResults.winning_player);
 	$('#nmd_results_winner').text($('#nmd-seat-column-'+nmdCardgamesResults.winning_player+' .nmd-player-name').text());
-	$('#nmd_results_hands_count').text(nmdCardgamesResults.hands_count);
+	$('.nmd_results_hands_count').text(nmdCardgamesResults.hands_count);
 
 	// update player stats
 	for (var j = 1; j <= nmdCardgamesGlobals.seats; j++) {
+		// calculate
 		var wins = nmdCardgamesResults.player_tricks['player_'+j]['total'];
-		var wins_with_trump = nmdCardgamesResults.player_tricks['player_'+j]['with_trump'];
-		var wins_without_trump = nmdCardgamesResults.player_tricks['player_'+j]['without_trump'];
-
 		var wins_percent = (100 * wins) / nmdCardgamesResults.hands_count;
-		var wins_with_trump_percent = (100 * wins_with_trump) / nmdCardgamesResults.hands_count;
-		var wins_without_trump_percent = (100 * wins_without_trump) / nmdCardgamesResults.hands_count;
 
+		var hands_with_trump = nmdCardgamesResults.player_tricks['player_'+j]['hands_with_trump'];
+		var wins_with_trump = nmdCardgamesResults.player_tricks['player_'+j]['with_trump'];
+		var wins_with_trump_percent = (100 * wins_with_trump) / hands_with_trump;
+
+		var hands_without_trump = nmdCardgamesResults.hands_count - hands_with_trump;
+		var wins_without_trump = nmdCardgamesResults.player_tricks['player_'+j]['without_trump'];
+		var wins_without_trump_percent = (100 * wins_without_trump) / hands_without_trump;
+
+		// build display strings
 		var display_string_wins = wins + '<span class="nmd_results_percent_without_decimals ' + (nmdCardgamesGlobals.display_percent_decimals ? 'd-none' : null ) + ' float-right">'+wins_percent.toFixed(0)+'%</span>' + '<span class="nmd_results_percent_with_decimals ' + (!nmdCardgamesGlobals.display_percent_decimals ? 'd-none' : null ) + ' float-right">'+wins_percent.toFixed(2)+'%</span>';
-		var display_string_wins_with_trump = wins_with_trump + '<span class="nmd_results_percent_without_decimals ' + (nmdCardgamesGlobals.display_percent_decimals ? 'd-none' : null ) + ' float-right">'+wins_with_trump_percent.toFixed(0)+'%</span>' + '<span class="nmd_results_percent_with_decimals ' + (!nmdCardgamesGlobals.display_percent_decimals ? 'd-none' : null ) + ' float-right">'+wins_with_trump_percent.toFixed(2)+'%</span>';
-		var display_string_wins_without_trump = wins_without_trump + '<span class="nmd_results_percent_without_decimals ' + (nmdCardgamesGlobals.display_percent_decimals ? 'd-none' : null ) + ' float-right">'+wins_without_trump_percent.toFixed(0)+'%</span>' + '<span class="nmd_results_percent_with_decimals ' + (!nmdCardgamesGlobals.display_percent_decimals ? 'd-none' : null ) + ' float-right">'+wins_without_trump_percent.toFixed(2)+'%</span>';
+		var display_string_wins_with_trump = 'hands: ' + hands_with_trump + '<br>wins: ' + wins_with_trump + '<br>percent: <span class="nmd_results_percent_without_decimals ' + (nmdCardgamesGlobals.display_percent_decimals ? ' d-none' : null) + '">' +  wins_with_trump_percent.toFixed(0) + '%</span>' + '<span class="nmd_results_percent_with_decimals ' + (!nmdCardgamesGlobals.display_percent_decimals ? 'd-none' : null)  + '">' + wins_with_trump_percent.toFixed(2) + '%</span>';
+		var display_string_wins_without_trump = 'hands: ' + hands_without_trump + '<br>wins: ' + wins_without_trump + '<br>percent: <span class="nmd_results_percent_without_decimals ' + (nmdCardgamesGlobals.display_percent_decimals ? ' d-none' : null) + '">' +  wins_without_trump_percent.toFixed(0) + '%</span>' + '<span class="nmd_results_percent_with_decimals ' + (!nmdCardgamesGlobals.display_percent_decimals ? 'd-none' : null)  + '">' + wins_without_trump_percent.toFixed(2) + '%</span>';
 
+		// update DOM elements
 		$('#nmd_results_player_'+j+'_wins').html(display_string_wins);
 		$('#nmd_results_player_'+j+'_wins_with_trump').html(display_string_wins_with_trump);
 		$('#nmd_results_player_'+j+'_wins_without_trump').html(display_string_wins_without_trump);
@@ -144,15 +158,19 @@ window.nmdAutoPlayHands = function () {
 	if (nmdCardgamesGlobals.auto_play_state == 'stopped') {
 		// update global var
 		nmdCardgamesGlobals.auto_play_state = 'running'
-		// set button state
+		// set button states
 		$('#nmd-autoplay-button').text('Stop').removeClass('btn-primary').addClass('btn-danger');
+		$('#nmd-playone-button').prop('disabled', true);
+		$('#nmd-number-of-players-select').prop('disabled', true);
 		// start autoplay
 		nmdCardgamesGlobals.auto_play_interval = setInterval(nmdPlayHand, 1);
 	} else {
 		// update global var
 		nmdCardgamesGlobals.auto_play_state = 'stopped'
-		// set button state
+		// set button states
 		$('#nmd-autoplay-button').text('Auto-Play').removeClass('btn-danger').addClass('btn-primary');
+		$('#nmd-playone-button').prop('disabled', false);
+		$('#nmd-number-of-players-select').prop('disabled', false);
 		// stop autoplay
 		nmdCardgamesGlobals.auto_play_interval = clearInterval(nmdCardgamesGlobals.auto_play_interval);
 	}
@@ -207,21 +225,23 @@ window.nmdInitStatistics = function () {
 	nmdCardgamesResults.hands_count = 0;
 	nmdCardgamesResults.winning_player = null;
 	nmdCardgamesResults.player_tricks =	{
-											'player_1': {'total':0, 'with_trump':0, 'without_trump':0},
-											'player_2': {'total':0, 'with_trump':0, 'without_trump':0},
-											'player_3': {'total':0, 'with_trump':0, 'without_trump':0},
-											'player_4': {'total':0, 'with_trump':0, 'without_trump':0},
-											'player_5': {'total':0, 'with_trump':0, 'without_trump':0}
+											'player_1': {'total':0, 'with_trump':0, 'without_trump':0, 'hands_with_trump':0},
+											'player_2': {'total':0, 'with_trump':0, 'without_trump':0, 'hands_with_trump':0},
+											'player_3': {'total':0, 'with_trump':0, 'without_trump':0, 'hands_with_trump':0},
+											'player_4': {'total':0, 'with_trump':0, 'without_trump':0, 'hands_with_trump':0},
+											'player_5': {'total':0, 'with_trump':0, 'without_trump':0, 'hands_with_trump':0}
 										};
 }
 
 
 window.nmdResetOutputDisplay = function () {
+	$('#nmd-number-of-players-select').prop('disabled', false);
+	$('#nmd-playone-button').prop('disabled', false);
 	for (var i = 1; i <= 5; i++) {
 		$('#nmd_results_player_'+i+'_wins').text('');
 		$('#nmd_results_player_'+i+'_wins_with_trump').text('');
 		$('#nmd_results_player_'+i+'_wins_without_trump').text('');
-		$('#nmd_results_hands_count').text('');
+		$('.nmd_results_hands_count').text('');
 		$('#nmd_results_winner').text('');
 	}
 }

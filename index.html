@@ -40,7 +40,7 @@
 					<span class="badge badge-success mr-1">2</span>&nbsp;<strong>Play Hands</strong>
 					<div class="mt-3 ml-3 row">
 						<div class="col-5">
-							<button type="button" class="btn btn-block btn-sm btn-secondary" onClick="nmdPlayHand();">Play One</button>
+							<button id="nmd-playone-button" type="button" class="btn btn-block btn-sm btn-secondary" onClick="nmdPlayHand();">Play One</button>
 						</div>
 						<div class="col-1 text-center pt-2">
 							<span class="h6">OR</span>
@@ -82,7 +82,7 @@
 								<h4>Statistics</h4>
 								<div class="row mb-2">
 									<div class="col-6 text-left">
-										Total Hands Played: <span id="nmd_results_hands_count"></span>
+										Total Hands Played: <span class="nmd_results_hands_count"></span>
 									</div>
 									<div class="col-6 text-right">
 										Last Winner: <span id="nmd_results_winner"></span>
@@ -101,31 +101,42 @@
 									<tbody>
 										<tr id="nmd_results_player_1_row" class="nmd_results_player_row">
 											<th scope="row">Player 1</th>
-											<td><span id="nmd_results_player_1_wins"></span></td>
+											<td>
+												Hands: <span class="nmd_results_hands_count float-right"></span><br>
+												<span id="nmd_results_player_1_wins"></span>
+											</td>
 											<td><span id="nmd_results_player_1_wins_with_trump"></span></td>
 											<td><span id="nmd_results_player_1_wins_without_trump"></span></td>
 										</tr>
 										<tr id="nmd_results_player_2_row" class="nmd_results_player_row">
 											<th scope="row">Player 2</th>
-											<td><span id="nmd_results_player_2_wins"></span></td>
+											<td>
+												Hands: <span class="nmd_results_hands_count float-right"></span><br>
+												<span id="nmd_results_player_2_wins"></span></td>
 											<td><span id="nmd_results_player_2_wins_with_trump"></span></td>
 											<td><span id="nmd_results_player_2_wins_without_trump"></span></td>
 										</tr>
 										<tr id="nmd_results_player_3_row" class="nmd_results_player_row">
 											<th scope="row">Player 3</th>
-											<td><span id="nmd_results_player_3_wins"></span></td>
+											<td>
+												Hands: <span class="nmd_results_hands_count float-right"></span><br>
+												<span id="nmd_results_player_3_wins"></span></td>
 											<td><span id="nmd_results_player_3_wins_with_trump"></span></td>
 											<td><span id="nmd_results_player_3_wins_without_trump"></span></td>
 										</tr>
 										<tr id="nmd_results_player_4_row" class="nmd_results_player_row">
 											<th scope="row">Player 4</th>
-											<td><span id="nmd_results_player_4_wins"></span></td>
+											<td>
+												Hands: <span class="nmd_results_hands_count float-right"></span><br>
+												<span id="nmd_results_player_4_wins"></span></td>
 											<td><span id="nmd_results_player_4_wins_with_trump"></span></td>
 											<td><span id="nmd_results_player_4_wins_without_trump"></span></td>
 										</tr>
 										<tr id="nmd_results_player_5_row" class="nmd_results_player_row">
 											<th scope="row">Player 5</th>
-											<td><span id="nmd_results_player_5_wins"></span></td>
+											<td>
+												Hands: <span class="nmd_results_hands_count float-right"></span><br>
+												<span id="nmd_results_player_5_wins"></span></td>
 											<td><span id="nmd_results_player_5_wins_with_trump"></span></td>
 											<td><span id="nmd_results_player_5_wins_without_trump"></span></td>
 										</tr>
