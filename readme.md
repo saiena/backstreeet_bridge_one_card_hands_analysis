@@ -15,7 +15,7 @@ This application can be used to view the win rate of Player 1 when they have a t
 ### Using the Application
 Using the application is a 3-step process:
 * Choose Players - Choose the number of players sitting at the virtual table
-* Play Hands - Click the "Play One" button to play a single hand; Click the "Auto-Play" button to start an atomated playing of multiple hands;
+* Play Hands - Click the "Play One" button to play a single hand; Click the "Auto-Play" button to start an automated playing of multiple hands;
 * View Stats - Scroll down to the "Statistics" section to view the result.
 
 **Tips**
