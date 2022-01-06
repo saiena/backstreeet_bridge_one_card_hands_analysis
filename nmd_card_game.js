@@ -90,7 +90,9 @@ window.nmdCalculateWinner = function () {
 		var player_card = nmdCardgamesResults.player_cards[player];
 
 		// record if the player has a trump card
-		nmdCardgamesResults.player_tricks[player]['hands_with_trump']++;
+		if (player_card['suit_code'] == nmdCardgamesGlobals.trump_card['suit_code']) {
+			nmdCardgamesResults.player_tricks[player]['hands_with_trump']++;
+		}
 
 		// if player connot follow suit, and they don't have trump, skip them
 		if (player_card['suit_code'] != winning_card['suit_code'] && player_card['suit_code'] != nmdCardgamesGlobals.trump_card['suit_code']) {
@@ -132,17 +134,25 @@ window.nmdUpdateResultsDisplay = function () {
 
 		var hands_with_trump = nmdCardgamesResults.player_tricks['player_'+j]['hands_with_trump'];
 		var wins_with_trump = nmdCardgamesResults.player_tricks['player_'+j]['with_trump'];
-		var wins_with_trump_percent = (100 * wins_with_trump) / hands_with_trump;
+		if (hands_with_trump > 0 && wins_with_trump > 0) {
+			var wins_with_trump_percent = (100 * wins_with_trump) / hands_with_trump;			
+		} else {
+			var wins_with_trump_percent = 0;
+		}
 
 		var hands_without_trump = nmdCardgamesResults.hands_count - hands_with_trump;
 		var wins_without_trump = nmdCardgamesResults.player_tricks['player_'+j]['without_trump'];
-		var wins_without_trump_percent = (100 * wins_without_trump) / hands_without_trump;
+		if (hands_without_trump > 0 && wins_without_trump > 0) {
+			var wins_without_trump_percent = (100 * wins_without_trump) / hands_without_trump;
+		} else {
+			var wins_without_trump_percent = 0;
+		}
 
 		// build display strings
-		var display_string_wins = 'wins: <span class="float-right">' + wins + '</span><br>win rate: <span class="nmd_results_percent_without_decimals float-right ' + (nmdCardgamesGlobals.display_percent_decimals ? ' d-none' : null) + '">' +  wins_percent.toFixed(0) + '%</span>' + '<span class="nmd_results_percent_with_decimals float-right ' + (!nmdCardgamesGlobals.display_percent_decimals ? 'd-none' : null)  + '">' + wins_percent.toFixed(2) + '%</span>';
-		//var display_string_wins = 'wins: <span class="float-right">' + wins + '</span><span class="nmd_results_percent_without_decimals ' + (nmdCardgamesGlobals.display_percent_decimals ? 'd-none' : null ) + ' float-right">'+wins_percent.toFixed(0)+'%</span>' + '<span class="nmd_results_percent_with_decimals ' + (!nmdCardgamesGlobals.display_percent_decimals ? 'd-none' : null ) + ' float-right">'+wins_percent.toFixed(2)+'%</span>';
-		var display_string_wins_with_trump = 'hands:<span class="float-right">' + hands_with_trump + '</span><br>wins:<span class="float-right">' + wins_with_trump + '</span><br>win rate: <span class="nmd_results_percent_without_decimals float-right ' + (nmdCardgamesGlobals.display_percent_decimals ? ' d-none' : null) + '">' +  wins_with_trump_percent.toFixed(0) + '%</span>' + '<span class="nmd_results_percent_with_decimals float-right ' + (!nmdCardgamesGlobals.display_percent_decimals ? 'd-none' : null)  + '">' + wins_with_trump_percent.toFixed(2) + '%</span>';
-		var display_string_wins_without_trump = 'hands:<span class="float-right">' + hands_without_trump + '</span><br>wins:<span class="float-right">' + wins_without_trump + '</span><br>win rate: <span class="nmd_results_percent_without_decimals float-right ' + (nmdCardgamesGlobals.display_percent_decimals ? ' d-none' : null) + '">' +  wins_without_trump_percent.toFixed(0) + '%</span>' + '<span class="nmd_results_percent_with_decimals float-right ' + (!nmdCardgamesGlobals.display_percent_decimals ? 'd-none' : null)  + '">' + wins_without_trump_percent.toFixed(2) + '%</span>';
+		var win_rate_extra_class = j == 1 ? 'text-primary' : '';
+		var display_string_wins = 'wins: <span class="float-right">' + wins + '</span><br><span class="' + win_rate_extra_class + '">win rate: </span><span class="nmd_results_percent_without_decimals float-right ' + win_rate_extra_class + (nmdCardgamesGlobals.display_percent_decimals ? ' d-none' : '') + '">' +  wins_percent.toFixed(0) + '%</span>' + '<span class="nmd_results_percent_with_decimals float-right ' + win_rate_extra_class + (!nmdCardgamesGlobals.display_percent_decimals ? ' d-none' : '')  + '">' + wins_percent.toFixed(2) + '%</span>';
+		var display_string_wins_with_trump = 'hands:<span class="float-right">' + hands_with_trump + '</span><br>wins:<span class="float-right">' + wins_with_trump + '</span><br><span class="' + win_rate_extra_class + '">win rate: </span><span class="nmd_results_percent_without_decimals float-right ' + win_rate_extra_class + (nmdCardgamesGlobals.display_percent_decimals ? ' d-none' : '') + '">' +  wins_with_trump_percent.toFixed(0) + '%</span>' + '<span class="nmd_results_percent_with_decimals float-right ' + win_rate_extra_class + (!nmdCardgamesGlobals.display_percent_decimals ? ' d-none' : '')  + '">' + wins_with_trump_percent.toFixed(2) + '%</span>';
+		var display_string_wins_without_trump = 'hands:<span class="float-right">' + hands_without_trump + '</span><br>wins:<span class="float-right">' + wins_without_trump + '</span><br><span class="' + win_rate_extra_class + '">win rate: </span><span class="nmd_results_percent_without_decimals float-right ' + win_rate_extra_class + (nmdCardgamesGlobals.display_percent_decimals ? ' d-none' : '') + '">' +  wins_without_trump_percent.toFixed(0) + '%</span>' + '<span class="nmd_results_percent_with_decimals float-right ' + win_rate_extra_class + (!nmdCardgamesGlobals.display_percent_decimals ? ' d-none' : '')  + '">' + wins_without_trump_percent.toFixed(2) + '%</span>';
 
 		// update DOM elements
 		$('#nmd_results_player_'+j+'_wins').html(display_string_wins);
