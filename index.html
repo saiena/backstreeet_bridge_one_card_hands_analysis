@@ -11,7 +11,10 @@
 	</head>
 	<body class="p-3">
 		<!-- JAVASCRIPT -->
-	    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+	    <!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script> -->
+	    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     	<script src="./nmd_card_game.js"></script>
 		
 		<div id="nmd-main-container" class="container">
@@ -57,7 +60,10 @@
 				</div>
 				<div class="col-md-3 mt-4 mt-md-0">
 					<span class="badge badge-success mr-1">3</span>&nbsp;<strong>View Stats</strong>
-					<p class="mt-2 ml-4" style="line-height:120%">Scroll down to view statistics.</p>
+					<p class="mt-2 ml-4" style="line-height:120%">
+						<button id="nmd-go-button" disabled type="button" class="btn btn-sm btn-secondary float-right" onClick="nmdScrollToDomElement('#nmd-stats-heading')">Go &darr;</button>
+						Scroll down to view statistics.
+					</p>
 				</div>
 			</div>
 			<div class="row" class="mt-5">
@@ -81,10 +87,9 @@
 								</div>
 							</div>
 						</div>
-
 						<div class="row mt-4">
 							<div class="col">
-								<h4>Statistics</h4>
+								<h4 id="nmd-stats-heading">Statistics</h4>
 								<div class="row mb-2">
 									<div class="col-6 text-left">
 										Total Hands Played: <span class="nmd_results_hands_count"></span>

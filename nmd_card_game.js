@@ -173,6 +173,7 @@ window.nmdAutoPlayHands = function () {
 		$('#nmd-autoplay-button').text('Stop').removeClass('btn-primary').addClass('btn-danger');
 		$('#nmd-playone-button').prop('disabled', true);
 		$('#nmd-number-of-players-select').prop('disabled', true);
+		$('#nmd-go-button').prop('disabled', false);
 		// start autoplay
 		nmdCardgamesGlobals.auto_play_interval = setInterval(nmdPlayHand, 1);
 	} else {
@@ -229,6 +230,7 @@ window.nmdInitHand = function () {
 	$('#nmd-output-deck-container').html('');
 	$('#nmd-output-trump-container').html('');
 	$('#nmd-output-table').removeClass('d-none');
+	$('#nmd-go-button').prop('disabled', false);
 	$('.nmd-playing-card').removeClass('nmd-winning-card')
 }
 
@@ -247,7 +249,9 @@ window.nmdInitStatistics = function () {
 
 window.nmdResetOutputDisplay = function () {
 	$('#nmd-number-of-players-select').prop('disabled', false);
+	$('#nmd-go-button').prop('disabled', true);
 	$('#nmd-playone-button').prop('disabled', false);
+	$('#nmd-go-button').prop('disabled', true);
 	for (var i = 1; i <= 5; i++) {
 		$('#nmd_results_player_'+i+'_wins').text('');
 		$('#nmd_results_player_'+i+'_wins_with_trump').text('');
@@ -321,6 +325,15 @@ window.nmdSetStandardDeck = function () {
 	});
 
 	
+}
+
+
+window.nmdScrollToDomElement = function (element_id) {
+$('html, body').animate({
+    scrollTop: $(element_id).offset().top
+}, 1000);
+
+	//$(element_id).get(0).scrollIntoView();
 }
 
 function shuffleFisherYates(array) {
