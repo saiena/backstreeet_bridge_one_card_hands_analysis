@@ -156,9 +156,21 @@
 										</tr>
 									</tbody>
 								</table>
-								<div class="custom-control custom-switch float-right mb-4">
+								<div class="custom-control custom-switch text-right mb-4">
 									<input type="checkbox" class="custom-control-input" id="nmd-percent-display-toggle">
 									<label class="custom-control-label" for="nmd-percent-display-toggle">Show Percent Decimals</label>
+								</div>
+								<div class="mb-5">
+									<p><strong>Player 1 Details</strong></p>
+									<p>After playing one or more hands, click the button below to view details of Player 1's performance (including win rates for specific card values).</p>
+									<p class="text-info">NOTE: Auto-Play will be stopped (if necessary) when you click the button.</p>
+									<p><button id="nmd-player1-details-btn" type="button" class="btn btn-sm btn-secondary" data-toggle="collapse" data-target="#nmd-player1-details" aria-expanded="false" aria-controls="nmd-player1-details">View Details</button></p>
+									<div class="collapse" id="nmd-player1-details">
+										<div class="card card-body">
+											<p class="text-center"><strong>Player 1 - Performance Details</strong></p>
+											<div id="nmd-player1-details-container"></div>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
