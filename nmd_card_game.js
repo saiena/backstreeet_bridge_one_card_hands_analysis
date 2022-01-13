@@ -287,6 +287,9 @@ window.nmdPlayHand = function () {
 		return;
 	}
 
+	// hide player 1 details
+	$('#nmd-player1-details').collapse('hide');
+
 	// init the new hand
 	nmdInitHand();
 
