@@ -40,6 +40,11 @@ $(document).ready(function() {
 		nmdDisplayPlayer1DetailsChart();
 	});
 	$('#nmd-player1-details').on('hide.bs.collapse', function () {
+		// reset data for chart
+		nmdPlayer1DetailsChartData =	{
+												'trump': [],
+												'non_trump': [],
+											};
 		// destroy chart
 		nmdPlayer1DetailsChart.destroy();
 		// clear details
