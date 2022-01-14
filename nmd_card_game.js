@@ -99,8 +99,6 @@ window.nmdDisplayPlayer1DetailsChart = function () {
 	nmdPlayer1DetailsChart = new Chart(ctx, {
 		type: 'bar',
 		data: {
-			//labels: ['2 of trump', '3 of trump', '4 of trump'],
-			//labels: nmdFormattedLabels,
 			labels: ['2','3','4','5','6','7','8','9','10','J','Q','K','A'],
 			datasets: [
 				{
@@ -110,7 +108,7 @@ window.nmdDisplayPlayer1DetailsChart = function () {
 						'rgba(106, 121, 187, 0.5)'
 					],
 					borderColor: [
-						'rgba(106, 121, 187, 0.8)',
+						'rgba(106, 121, 187, 0.8)'
 					],
 					borderWidth: 1
 				},
@@ -138,9 +136,11 @@ window.nmdDisplayPlayer1DetailsChart = function () {
 			scales: {
 				y: {
 					beginAtZero: true,
+					min: 0,
 					max: 100,
+					type: 'linear',
 					ticks: {
-						stepSize: 5
+						stepSize: 10
 					}
 				}
 			}
