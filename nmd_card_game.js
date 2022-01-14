@@ -18,6 +18,11 @@ nmdCardgamesResults.player_cards =	{
 									};
 nmdCardgamesResults.player_tricks =	{};
 nmdCardgamesResults.player_1_details = {};
+var nmdPlayer1DetailsChart;
+var nmdPlayer1DetailsChartData =	{
+												'trump': [],
+												'non_trump': [],
+											};
 
 // start application	
 $(document).ready(function() {
@@ -29,9 +34,14 @@ $(document).ready(function() {
 		if (nmdCardgamesGlobals.auto_play_state != 'stopped') {
 			nmdAutoPlayHands();
 		}
+		// display tables
 		nmdDisplayPlayer1Details();
+		// display chart
+		nmdDisplayPlayer1DetailsChart();
 	});
 	$('#nmd-player1-details').on('hide.bs.collapse', function () {
+		// destroy chart
+		nmdPlayer1DetailsChart.destroy();
 		// clear details
 		$('#nmd-player1-details-container').html('');
 	})
@@ -84,7 +94,66 @@ $(document).ready(function() {
 	});
 });
 
+window.nmdDisplayPlayer1DetailsChart = function () {
+	const ctx = document.getElementById('nmd-player1-details-canvas').getContext('2d');
+	nmdPlayer1DetailsChart = new Chart(ctx, {
+		type: 'bar',
+		data: {
+			//labels: ['2 of trump', '3 of trump', '4 of trump'],
+			//labels: nmdFormattedLabels,
+			labels: ['2','3','4','5','6','7','8','9','10','J','Q','K','A'],
+			datasets: [
+				{
+					label: 'Non-Trump',
+					data: nmdPlayer1DetailsChartData.non_trump,
+					backgroundColor: [
+						'rgba(106, 121, 187, 0.5)'
+					],
+					borderColor: [
+						'rgba(106, 121, 187, 0.8)',
+					],
+					borderWidth: 1
+				},
+				{
+					label: 'Trump',
+					data: nmdPlayer1DetailsChartData.trump,
+					backgroundColor: [
+						'rgba(92, 137, 61, 0.5)'
+					],
+					borderColor: [
+						'rgba(92, 137, 61, 0.8)'
+					],
+					borderWidth: 1
+				}
+			]
+		},
+		options: {
+			maintainAspectRatio: false,
+			responsive: true,
+			plugins: {
+				legend: {
+					position: 'top',
+				},
+			},
+			scales: {
+				y: {
+					beginAtZero: true,
+					max: 100,
+					ticks: {
+						stepSize: 5
+					}
+				}
+			}
+		}
+	});
+}
+
 window.nmdDisplayPlayer1Details = function () {
+	/* we also will build the data for chart and store in:
+		nmdPlayer1DetailsChartData.trump
+		nmdPlayer1DetailsChartData.non_trump
+	*/
+
 	// init vars
 	var player1_details_html = '';
 	var categories = ['non_trump', 'trump'];
@@ -94,7 +163,7 @@ window.nmdDisplayPlayer1Details = function () {
 		var category_label = category == 'trump' ? 'Trump' : 'Non-Trump';
 
 		// init html
-		player1_details_html += '<p><strong>Performance with ' + category_label + ' Cards</strong></p>';
+		player1_details_html += '<p class="mt-4"><strong>Performance with ' + category_label + ' Cards</strong></p>';
 		player1_details_html += '<table class="table table-bordered">';
 		player1_details_html += '	<thead class="thead-light">';
 		player1_details_html += '		<tr>';
@@ -126,8 +195,10 @@ window.nmdDisplayPlayer1Details = function () {
 			}
 			var wins_and_losses = parseInt(details.wins) + parseInt(details.losses);
 			if (wins_and_losses > 0) {
+				var win_rate_raw = ((100 * parseInt(details.wins)) / wins_and_losses).toFixed(0);
 				var win_rate = ((100 * parseInt(details.wins)) / wins_and_losses).toFixed(0) + '%';
 			} else {
+				var win_rate_raw = 0;
 				var win_rate = '--';
 			}
 
@@ -138,6 +209,9 @@ window.nmdDisplayPlayer1Details = function () {
 			player1_details_html += '			<td class="text-right">' + details.losses + '</td>';
 			player1_details_html += '			<td class="text-right">' + win_rate + '</td>';
 			player1_details_html += '		</tr>';
+
+			// add data for chartjs
+			nmdPlayer1DetailsChartData[category].push(win_rate_raw);
 		});
 
 		// finish html
@@ -420,7 +494,6 @@ window.nmdSetStandardDeck = function () {
 								'color': suit[1]
 							}
 						);				
-						
 		});
 	});
 
@@ -430,7 +503,7 @@ window.nmdSetStandardDeck = function () {
 
 window.nmdScrollToDomElement = function (element_id) {
 $('html, body').animate({
-    scrollTop: $(element_id).offset().top
+	scrollTop: $(element_id).offset().top
 }, 1000);
 
 	//$(element_id).get(0).scrollIntoView();
