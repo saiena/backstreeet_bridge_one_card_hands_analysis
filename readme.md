@@ -2,6 +2,8 @@
 
 **Winning Percentages For One-Card Hands**
 
+Live Application: https://www.newmediadimensions.com/apps/backstreeet_bridge_one_card_hands_analysis/index.html
+
 This application was developed to provide insights into the best strategy for a specific scenario in Backstreet Bridge:
 * Hand consists of 1 card dealt to each player
 * Player 1 (the player to the dealer's left) must decide what to bid

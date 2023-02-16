@@ -26,6 +26,12 @@ var nmdPlayer1DetailsChartData =	{
 
 // start application	
 $(document).ready(function() {
+	// init the help panel
+	$('#offscreenHelpPanel').on('show.bs.offcanvas', function (e) {
+		// load content
+		$('#help-panel-container').load('./help.html');
+	});
+
 	// init stats
 	nmdInitStatistics();
 	// bind to collapsable player 1 details
@@ -322,9 +328,9 @@ window.nmdUpdateResultsDisplay = function () {
 
 		// build display strings
 		var win_rate_extra_class = j == 1 ? 'text-primary' : '';
-		var display_string_wins = 'wins: <span class="float-right">' + wins + '</span><br><span class="' + win_rate_extra_class + '">win&nbsp;rate: </span><span class="nmd_results_percent_without_decimals float-right ' + win_rate_extra_class + (nmdCardgamesGlobals.display_percent_decimals ? ' d-none' : '') + '">' +  wins_percent.toFixed(0) + '%</span>' + '<span class="nmd_results_percent_with_decimals float-right ' + win_rate_extra_class + (!nmdCardgamesGlobals.display_percent_decimals ? ' d-none' : '')  + '">' + wins_percent.toFixed(2) + '%</span>';
-		var display_string_wins_with_trump = 'hands:<span class="float-right">' + hands_with_trump + '</span><br>wins:<span class="float-right">' + wins_with_trump + '</span><br><span class="' + win_rate_extra_class + '">win&nbsp;rate: </span><span class="nmd_results_percent_without_decimals float-right ' + win_rate_extra_class + (nmdCardgamesGlobals.display_percent_decimals ? ' d-none' : '') + '">' +  wins_with_trump_percent.toFixed(0) + '%</span>' + '<span class="nmd_results_percent_with_decimals float-right ' + win_rate_extra_class + (!nmdCardgamesGlobals.display_percent_decimals ? ' d-none' : '')  + '">' + wins_with_trump_percent.toFixed(2) + '%</span>';
-		var display_string_wins_without_trump = 'hands:<span class="float-right">' + hands_without_trump + '</span><br>wins:<span class="float-right">' + wins_without_trump + '</span><br><span class="' + win_rate_extra_class + '">win&nbsp;rate: </span><span class="nmd_results_percent_without_decimals float-right ' + win_rate_extra_class + (nmdCardgamesGlobals.display_percent_decimals ? ' d-none' : '') + '">' +  wins_without_trump_percent.toFixed(0) + '%</span>' + '<span class="nmd_results_percent_with_decimals float-right ' + win_rate_extra_class + (!nmdCardgamesGlobals.display_percent_decimals ? ' d-none' : '')  + '">' + wins_without_trump_percent.toFixed(2) + '%</span>';
+		var display_string_wins = 'wins: <span class="float-end">' + wins + '</span><br><span class="' + win_rate_extra_class + '">win&nbsp;rate: </span><span class="nmd_results_percent_without_decimals float-end ' + win_rate_extra_class + (nmdCardgamesGlobals.display_percent_decimals ? ' d-none' : '') + '">' +  wins_percent.toFixed(0) + '%</span>' + '<span class="nmd_results_percent_with_decimals float-end ' + win_rate_extra_class + (!nmdCardgamesGlobals.display_percent_decimals ? ' d-none' : '')  + '">' + wins_percent.toFixed(2) + '%</span>';
+		var display_string_wins_with_trump = 'hands:<span class="float-end">' + hands_with_trump + '</span><br>wins:<span class="float-end">' + wins_with_trump + '</span><br><span class="' + win_rate_extra_class + '">win&nbsp;rate: </span><span class="nmd_results_percent_without_decimals float-end ' + win_rate_extra_class + (nmdCardgamesGlobals.display_percent_decimals ? ' d-none' : '') + '">' +  wins_with_trump_percent.toFixed(0) + '%</span>' + '<span class="nmd_results_percent_with_decimals float-end ' + win_rate_extra_class + (!nmdCardgamesGlobals.display_percent_decimals ? ' d-none' : '')  + '">' + wins_with_trump_percent.toFixed(2) + '%</span>';
+		var display_string_wins_without_trump = 'hands:<span class="float-end">' + hands_without_trump + '</span><br>wins:<span class="float-end">' + wins_without_trump + '</span><br><span class="' + win_rate_extra_class + '">win&nbsp;rate: </span><span class="nmd_results_percent_without_decimals float-end ' + win_rate_extra_class + (nmdCardgamesGlobals.display_percent_decimals ? ' d-none' : '') + '">' +  wins_without_trump_percent.toFixed(0) + '%</span>' + '<span class="nmd_results_percent_with_decimals float-end ' + win_rate_extra_class + (!nmdCardgamesGlobals.display_percent_decimals ? ' d-none' : '')  + '">' + wins_without_trump_percent.toFixed(2) + '%</span>';
 
 		// update DOM elements
 		$('#nmd_results_player_'+j+'_wins').html(display_string_wins);
